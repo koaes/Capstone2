@@ -1,21 +1,17 @@
 package com.example.windows7.myapplication;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
-
 import com.example.windows7.myapplication.adapters.MenuListAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 
@@ -23,6 +19,7 @@ public class MainMenuFragment extends Fragment {
 
     ArrayList<String> menuArray = new ArrayList<String>();
     Communicator communicator;
+    private AdView mAdView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +29,11 @@ public class MainMenuFragment extends Fragment {
 
         menuArray.add("English");
         menuArray.add("Deutsch");
+
+        MobileAds.initialize(getContext(), "ca-app-pub-3940256099942544/6300978111");
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
 
         RecyclerView mRecyclerView = view.findViewById(R.id.initial_recycler_view);

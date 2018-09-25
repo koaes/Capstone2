@@ -6,8 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    tools:context=".MainActivity">
-
+    tools:context=".MainActivity"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.android.com/apk/res/android ">
 
 
     <ImageView
@@ -15,24 +16,14 @@
         android:layout_height="match_parent"
         android:id="@+id/image"
         android:background="@drawable/jungle"
-        android:alpha=".3"/>
+        android:alpha=".3" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/initial_recycler_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="64dp"/>
+        android:layout_margin="64dp" />
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
-    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>
