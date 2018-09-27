@@ -1,5 +1,7 @@
 package com.example.windows7.myapplication;
 
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -31,4 +33,6 @@ public class ActivityMenu extends AppCompatActivity {
 
 
     }
+
+
 }

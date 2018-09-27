@@ -40,10 +40,10 @@ public class MainMenuFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        MenuListAdapter mAdapter = new MenuListAdapter(getActivity(),menuArray);
+        MenuListAdapter mAdapter = new MenuListAdapter(getActivity(),menuArray, MainMenuFragment.this);
         mRecyclerView.setAdapter(mAdapter);
 
-        return view;
+         return view;
     }
 
     public interface Communicator{

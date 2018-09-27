@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.windows7.myapplication.adapters.ActivityMenuListAdapter;
 import com.example.windows7.myapplication.adapters.MenuListAdapter;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 public class ActivityMenuFragment extends Fragment {
 
     ArrayList<String> menuActivityArray = new ArrayList<String>();
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,14 +33,23 @@ public class ActivityMenuFragment extends Fragment {
         menuActivityArray.add("Addition");
         menuActivityArray.add("Subtraction");
 
-        ListView menuActivityView = view.findViewById(R.id.activitylist);
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, menuActivityArray);
-        menuActivityView.setAdapter(adapter);
+        //ListView menuActivityView = view.findViewById(R.id.activitylist);
+        //ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.main_cardview_item, menuActivityArray);
+        //menuActivityView.setAdapter(adapter);
 
+
+        RecyclerView mRecyclerView = view.findViewById(R.id.initial_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        ActivityMenuListAdapter mAdapter = new ActivityMenuListAdapter(getActivity(),menuActivityArray);
+        mRecyclerView.setAdapter(mAdapter);
 
 
         return view;
-
-
     }
+
+
 }
