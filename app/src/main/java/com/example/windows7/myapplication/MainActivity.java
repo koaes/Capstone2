@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements MainMenuFragment.Communicator {
 
@@ -13,6 +17,9 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
 
         MainMenuFragment mainMenuFragment = new MainMenuFragment();
@@ -42,6 +49,18 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
     @Override
     public void respond(int position) {
 
+        Locale primary = getApplicationContext().getResources().getConfiguration().locale;
+
+        if(position==1){
+            primary = new Locale("de");
+        } else{
+            primary = new Locale("us");
+        }
+        Configuration configuration = getBaseContext().getResources().getConfiguration();
+        configuration.locale = primary;
+        getBaseContext().getResources().updateConfiguration(configuration,
+                getBaseContext().getResources().getDisplayMetrics());
+
         if((getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)) {
             ActivityMenuFragment newFragment = new ActivityMenuFragment();
 
@@ -55,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
             //transaction.addToBackStack(null);
             //transaction.commit();
         }else{
+
             Intent intent = new Intent(this, ActivityMenu.class);
             //intent.putExtra("Package",currentRecipe);
             //intent.putExtra("Position", position);

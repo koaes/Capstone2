@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="numbers">Nummers</string>
+    <string name="adding">Addieren</string>
+    <string name="subtracting">Subtrahierenern</string>
+
+
+</resources>

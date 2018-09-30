@@ -1,32 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_menu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainMenuFragment">
+    android:clipToPadding="false"
+    tools:context=".MathActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/image"
+        android:background="@drawable/ocean"
+        android:alpha=".3"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:id="@+id/problemsLinear"
+        android:orientation="horizontal"
+        android:layout_below="@+id/my_toolbar">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2"
             android:textSize="128sp"
+            android:textColor="@color/colorAccent"
             android:layout_weight="1"
             android:gravity="center"
             android:id="@+id/textFirstNumber"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2"
+            android:text="+"
             android:textSize="128sp"
+            android:textColor="@color/colorAccent"
             android:layout_weight="1"
             android:gravity="center"
             android:id="@+id/textOperation"/>
@@ -35,26 +55,57 @@
             android:layout_height="wrap_content"
             android:text="2"
             android:textSize="128sp"
+            android:textColor="@color/colorAccent"
             android:layout_weight="1"
             android:gravity="center"
             android:id="@+id/textSecondNumber"/>
 
     </LinearLayout>
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/animation"
+        android:layout_below="@+id/problemsLinear"
         android:text="Answer" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/answerText"
+        android:layout_below="@+id/animation"
+        android:hint="Answer"
+        android:maxLength="2"
+        android:textColor="@color/colorAccent"
+        android:textSize="64sp"
+        android:gravity="center"
         android:inputType="number"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:background="@drawable/mybutton"
+            android:layout_weight="1"
+            android:text="Check" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:background="@drawable/mybutton"
+            android:layout_weight="1"
+            android:text="Next" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

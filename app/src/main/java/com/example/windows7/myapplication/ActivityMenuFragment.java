@@ -29,9 +29,9 @@ public class ActivityMenuFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_activity_menu, container, false);
 
-        menuActivityArray.add("Numbers");
-        menuActivityArray.add("Addition");
-        menuActivityArray.add("Subtraction");
+        menuActivityArray.add(getString(R.string.numbers));
+        menuActivityArray.add(getString(R.string.adding));
+        menuActivityArray.add(getString(R.string.subtracting));
 
         //ListView menuActivityView = view.findViewById(R.id.activitylist);
         //ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.main_cardview_item, menuActivityArray);
