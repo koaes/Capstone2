@@ -20,6 +20,9 @@
         <activity android:name=".CountingActivity" />
         <activity android:name=".MathActivity" />
 
+        <service
+            android:name=".service.AppIntentService"
+            android:exported="false"/>
         <receiver android:name=".AppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

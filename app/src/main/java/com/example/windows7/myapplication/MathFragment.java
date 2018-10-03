@@ -2,9 +2,12 @@ package com.example.windows7.myapplication;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,7 @@ public class MathFragment extends android.support.v4.app.Fragment{
     int firstQuestion;
     int secondQuestion;
     int answer;
+    SharedPreferences sharedPreferences;
 
     private AppDatabase mDb;
 
@@ -40,28 +44,15 @@ public class MathFragment extends android.support.v4.app.Fragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_math, container, false);
 
-
         mDb = AppDatabase.getInstance(getActivity());
-
-
-        MathProblem mathProblem = new MathProblem();
 
         first = view.findViewById(R.id.textFirstNumber);
         operation = view.findViewById(R.id.textOperation);
         second = view.findViewById(R.id.textSecondNumber);
         edit = view.findViewById(R.id.answerText);
 
-        //for(int i = 0; i<5; i++){
 
         getProblem();
-
-            //firstQuestion = mathProblem.getFirstInt();
-            //secondQuestion = mathProblem.getSecondInt();
-
-            //first.setText(Integer.toString(firstQuestion));
-            //operation.setText("+");
-            //second.setText(Integer.toString(secondQuestion));
-
 
         final Button checkbutton = view.findViewById(R.id.button1);
         checkbutton.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +67,17 @@ public class MathFragment extends android.support.v4.app.Fragment{
                     Date date = new Date();
                     Stats stats = new Stats(date,"addition",firstQuestion,secondQuestion,1);
                     mDb.statsDao().insertStats(stats);
+
+                    sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                    SharedPreferences.Editor edit = sharedPreferences.edit();
+                    edit.putString("row",Integer.toString(firstQuestion));
+                    edit.apply();
+
+                    Log.v("SharedPref", "Testing");
+
+                    AppWidget.sendRefreshBroadcast(getActivity());
+
+
                     getProblem();
 
 
