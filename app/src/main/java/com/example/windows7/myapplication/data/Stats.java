@@ -18,24 +18,24 @@ public class Stats {
     private String studyType; //addition or subtraction
     private int first;
     private int second;
-    private int numberAttempts;
+    private boolean correct = true;
 
     @Ignore
-    public Stats(Date studyDate, String studyType, int first, int second, int numberAttempts) {
+    public Stats(Date studyDate, String studyType, int first, int second, boolean correct) {
         this.studyDate = studyDate;
         this.studyType = studyType;
         this.first = first;
         this.second = second;
-        this.numberAttempts = numberAttempts;
+        this.correct = correct;
     }
 
-    public Stats(@NonNull int sessionID, Date studyDate, String studyType, int first, int second, int numberAttempts) {
+    public Stats(@NonNull int sessionID, Date studyDate, String studyType, int first, int second, boolean correct) {
         this.sessionID = sessionID;
         this.studyDate = studyDate;
         this.studyType = studyType;
         this.first = first;
         this.second = second;
-        this.numberAttempts = numberAttempts;
+        this.correct = correct;
     }
 
     @NonNull
@@ -79,11 +79,11 @@ public class Stats {
         this.second = second;
     }
 
-    public int getNumberAttempts() {
-        return numberAttempts;
+    public boolean getCorrect() {
+        return correct;
     }
 
-    public void setNumberAttempts(int numberAttempts) {
-        this.numberAttempts = numberAttempts;
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
     }
 }

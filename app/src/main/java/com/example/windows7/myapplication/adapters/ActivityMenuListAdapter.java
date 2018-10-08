@@ -10,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.windows7.myapplication.ActivityMenu;
+import com.example.windows7.myapplication.ActivityMenuFragment;
+import com.example.windows7.myapplication.CountingActivity;
+import com.example.windows7.myapplication.MainMenuFragment;
 import com.example.windows7.myapplication.MathActivity;
 import com.example.windows7.myapplication.R;
 import java.util.ArrayList;
@@ -20,6 +25,7 @@ public class ActivityMenuListAdapter extends RecyclerView.Adapter<ActivityMenuLi
     private ArrayList<String> mDataset;
     Intent intent;
     private Context context;
+    ActivityMenuFragment fragment;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -35,10 +41,7 @@ public class ActivityMenuListAdapter extends RecyclerView.Adapter<ActivityMenuLi
 
                     int pos = getAdapterPosition();
 
-                    intent = new Intent(context, MathActivity.class);
-                    //Recipe currentRecipe = mDataset.get(pos);
-                    //intent.putExtra("Image", recipeImage);
-                    context.startActivity(intent);
+                    fragment.callRespond(pos);
 
                 }
             });
@@ -46,9 +49,10 @@ public class ActivityMenuListAdapter extends RecyclerView.Adapter<ActivityMenuLi
     }
 
 
-    public ActivityMenuListAdapter (Context context, ArrayList<String> myDataset) {
+    public ActivityMenuListAdapter (Context context, ArrayList<String> myDataset, ActivityMenuFragment fragment) {
         this.mDataset = myDataset;
         this.context = context;
+        this.fragment = fragment;
 
     }
 

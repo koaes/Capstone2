@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class ActivityMenuFragment extends Fragment {
 
     ArrayList<String> menuActivityArray = new ArrayList<String>();
-
+    ActivityMenuFragment.Communicator communicator;
 
 
     @Override
@@ -44,12 +44,37 @@ public class ActivityMenuFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        ActivityMenuListAdapter mAdapter = new ActivityMenuListAdapter(getActivity(),menuActivityArray);
+        ActivityMenuListAdapter mAdapter = new ActivityMenuListAdapter(getActivity(),menuActivityArray, ActivityMenuFragment.this);
         mRecyclerView.setAdapter(mAdapter);
 
 
         return view;
     }
 
+    public interface Communicator{
+        void respond (int stepPosition);
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+
+        if(context instanceof ActivityMenuFragment.Communicator){
+            communicator = (ActivityMenuFragment.Communicator) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement Communicator.OnItemSelectedListener");
+        }
+    }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        communicator = null;
+    }
+
+    public void callRespond(int position){
+        communicator.respond(position);
+    }
 
 }

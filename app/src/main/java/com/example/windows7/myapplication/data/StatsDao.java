@@ -1,5 +1,6 @@
 package com.example.windows7.myapplication.data;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -15,6 +16,10 @@ public interface StatsDao {
 
     @Query("SELECT * FROM stats ORDER BY sessionID")
     List<Stats> loadAllStats();
+
+
+    @Query("SELECT COUNT(sessionID) from stats")
+    LiveData<Integer> getTotal();
 
     @Insert
     void insertStats(Stats stats);

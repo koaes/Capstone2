@@ -7,11 +7,16 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements MainMenuFragment.Communicator {
 
     android.support.v4.app.FragmentManager manager;
+    private Tracker mTracker;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +26,10 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        // Obtain the shared Tracker instance.
+
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
         MainMenuFragment mainMenuFragment = new MainMenuFragment();
 
@@ -28,14 +37,16 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
         android.support.v4.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, mainMenuFragment, "Main");
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            ActivityMenuFragment activityMenuFragment = new ActivityMenuFragment();
-            fragmentTransaction.add(R.id.fragment_container2, activityMenuFragment, "Activity");
-
-        }
         fragmentTransaction.commit();
 
+    }
 
+    @Override
+    protected void onResume() {
+            super.onResume();
+    // sets screen name and send it to google analytics<br />
+                mTracker.setScreenName("Main Activity");
+                mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
@@ -51,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
 
         Locale primary = getApplicationContext().getResources().getConfiguration().locale;
 
+        Log.v("Language Position", Integer.toString(position));
+
         if(position==1){
             primary = new Locale("de");
         } else{
@@ -61,26 +74,11 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
         getBaseContext().getResources().updateConfiguration(configuration,
                 getBaseContext().getResources().getDisplayMetrics());
 
-        if((getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)) {
-            ActivityMenuFragment newFragment = new ActivityMenuFragment();
-
-            //Bundle bundle = new Bundle();
-            //bundle.putParcelable("Package", currentRecipe);
-            //bundle.putInt("Position",position);
-            //newFragment.setArguments(bundle);
-
-            //android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            //transaction.replace(R.id.fragment_container2, newFragment);
-            //transaction.addToBackStack(null);
-            //transaction.commit();
-        }else{
-
-            Intent intent = new Intent(this, ActivityMenu.class);
-            //intent.putExtra("Package",currentRecipe);
-            //intent.putExtra("Position", position);
-            startActivity(intent);
+        Intent intent = new Intent(this, ActivityMenu.class);
+        switch(position){
+            case 0: intent.putExtra("Lang", "en"); break;
+            case 1: intent.putExtra("Lang", "de"); break;
         }
-
+        startActivity(intent);
     }
-
 }

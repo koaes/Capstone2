@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.windows7.myapplication.ActivityMenu;
+import com.example.windows7.myapplication.CountingActivity;
 import com.example.windows7.myapplication.MainMenuFragment;
+import com.example.windows7.myapplication.MathActivity;
 import com.example.windows7.myapplication.R;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -40,8 +42,6 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.ViewHo
                 public void onClick(View v) {
 
                     int pos = getAdapterPosition();
-
-
 
                     //intent = new Intent(context, ActivityMenu.class);
                     //Recipe currentRecipe = mDataset.get(pos);
