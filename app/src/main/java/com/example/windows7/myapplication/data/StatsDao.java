@@ -21,6 +21,9 @@ public interface StatsDao {
     @Query("SELECT COUNT(sessionID) from stats")
     LiveData<Integer> getTotal();
 
+    @Query("SELECT COUNT(sessionID) from stats")
+    Integer getWidgetTotal();
+
     @Insert
     void insertStats(Stats stats);
 

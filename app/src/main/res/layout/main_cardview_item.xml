@@ -24,7 +24,8 @@
             android:padding="1dp"
             android:textColor="@color/black"
             android:textSize="36sp"
-            android:text="English"/>
+            android:fontFamily="@font/chunkfive"
+            android:text="@string/english"/>
 
     </LinearLayout>
 

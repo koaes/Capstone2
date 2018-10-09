@@ -66,6 +66,8 @@ public class MathFragment extends android.support.v4.app.Fragment{
     Context context;
     String oper;
     String lang;
+    Integer totalNumber;
+    Integer widgetNumbertoPass;
 
     private AppDatabase mDb;
 
@@ -130,15 +132,12 @@ public class MathFragment extends android.support.v4.app.Fragment{
                         @Override
                         public void run() {
                             mDb.statsDao().insertStats(stats);
+
+
                         }
                     });
 
-                    // Section for gathering info for Widget and sending broadcast
-                    sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                    SharedPreferences.Editor edit = sharedPreferences.edit();
-                    edit.putString("row",Integer.toString(firstQuestion));
-                    edit.apply();
-                    AppWidget.sendRefreshBroadcast(getActivity());
+
 
                     // Sets up and displays the next problem
                     getProblem(oper);
@@ -160,6 +159,40 @@ public class MathFragment extends android.support.v4.app.Fragment{
 
                 }
 
+
+                MainViewModel viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+
+                viewModel.getReturnedNumber().observe(getActivity(), new Observer<Integer>() {
+                    @Override
+                    public void onChanged(@Nullable Integer integer) {
+                        data.setText("");
+                        totalNumber = integer;
+                        String result = "For today, you have answered " + totalNumber + " questions!!";
+                        data.setText(result);
+
+
+                    }
+                });
+
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        widgetNumbertoPass = mDb.statsDao().getWidgetTotal();
+                        Log.v("Stats", Integer.toString(widgetNumbertoPass));
+                        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                        SharedPreferences.Editor edit = sharedPreferences.edit();
+
+
+                        String widgetNumber = Integer.toString(widgetNumbertoPass);
+                        edit.putString("row",(widgetNumber));
+                        edit.apply();
+                        AppWidget.sendRefreshBroadcast(getActivity());
+                    }
+                });
+
+                // Section for gathering info for Widget and sending broadcast
+
+
             }
         });
 
@@ -168,8 +201,20 @@ public class MathFragment extends android.support.v4.app.Fragment{
             public void onClick(View v) {
 
                 final StringBuilder result = new StringBuilder(50);
-                //List<Stats> statsList = mDb.statsDao().loadAllStats();
+                //
+                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<Stats> statsList = mDb.statsDao().loadAllStats();
+                        for(int i=0; i<statsList.size(); i++){
+                                String studydate = statsList.get(i).getStudyDate().toString();
+                                String first = Integer.toString(statsList.get(i).getSessionID());
 
+                                result.append(studydate + "  " + first + "\n");
+                             }
+                        Log.v("Stats", result.toString());
+                    }
+                });
 
                 //for(int i=0; i<statsList.size(); i++){
                 //    String studydate = statsList.get(i).getStudyDate().toString();
@@ -181,17 +226,7 @@ public class MathFragment extends android.support.v4.app.Fragment{
                 //Toast.makeText(getContext(), Integer.toString(mDb.statsDao().getTotal()),Toast.LENGTH_LONG).show();
                 //returnedNumber = mDb.statsDao().getTotal();
 
-                MainViewModel viewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
 
-                viewModel.getReturnedNumber().observe(getActivity(), new Observer<Integer>() {
-                    @Override
-                    public void onChanged(@Nullable Integer integer) {
-                        data.setText("");
-                        Integer totalNumber = integer;
-                        String result = "For today, you have answered " + totalNumber + " questions!!";
-                        data.setText(result);
-                    }
-                });
             }
         });
 

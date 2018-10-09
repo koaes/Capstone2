@@ -1,35 +1,70 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#3F51B5"
-    android:padding="@dimen/widget_margin">
+    android:clipToPadding="false"
+    tools:context=".MathActivity">
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/image"
+        android:background="@drawable/ocean"
+        android:alpha=".3"/>
 
     <TextView
-        android:id="@+id/appwidget_text"
-        android:layout_width="wrap_content"
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
+        android:fontFamily="@font/chunkfive"
+        android:layout_alignParentTop="true"
         android:contentDescription="@string/appwidget_text"
-        android:text="Capstone"
-        android:textColor="#ffffff"
+        android:textColor="@color/white"
+        android:text="@string/MainTitle"
         android:textSize="16sp"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
         android:textStyle="bold|italic" />
 
-    <TextView
-        android:id="@+id/subTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clipToPadding="false"
+        android:padding="@dimen/widget_margin"
+        android:layout_below="@+id/Title">
+
+
+        <TextView
+            android:id="@+id/subTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/chunkfive"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="8dp"
+            android:contentDescription="@string/appwidget_text"
+            android:textColor="#292121"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:contentDescription="@string/appwidget_text"
-        android:textColor="#ffffff"
-        android:text="test"
+        android:id="@+id/widgetButton"
+        android:fontFamily="@font/chunkfive"
         android:textSize="16sp"
-        android:textStyle="bold|italic" />
+        android:text="Study Now"
+        android:textColor="@color/white"
+        android:background="@drawable/mybutton"
+        android:layout_alignParentBottom="true"/>
 
-
-</LinearLayout>
+</RelativeLayout>

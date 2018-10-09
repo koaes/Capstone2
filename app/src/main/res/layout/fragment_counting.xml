@@ -35,61 +35,64 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="2"
+            android:fontFamily="@font/chunkfive"
             android:textSize="128sp"
             android:textColor="@color/black"
             android:layout_weight="1"
             android:gravity="center"
             android:id="@+id/textFirstNumber"/>
-
-
     </LinearLayout>
-
-
-    <com.example.windows7.myapplication.views.CustomView
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:id="@+id/animation"
-        android:layout_below="@+id/problemsLinear"
-        android:gravity="center"
-        tools:targetApi="21"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Answer"
-        android:textSize="64sp"
+        android:fontFamily="@font/chunkfive"
+        android:hint="@string/answerCounting"
+        android:textSize="32sp"
         android:textColor="@color/black"
         android:gravity="center"
         android:id="@+id/answerText"
-        android:layout_below="@+id/animation"
+        android:layout_below="@+id/problemsLinear"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_above="@+id/button3">
 
         <Button
             android:id="@+id/button1"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/chunkfive"
             android:textColor="#ffffff"
             android:background="@drawable/mybutton"
             android:layout_weight="1"
-            android:text="Deutsch" />
+            android:text="@string/deutsch" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/chunkfive"
             android:textColor="#ffffff"
             android:background="@drawable/mybutton"
             android:layout_weight="1"
-            android:text="English" />
+            android:text="@string/english" />
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/chunkfive"
+        android:textColor="#ffffff"
+        android:background="@drawable/mybutton"
+        android:layout_weight="1"
+        android:text="@string/next"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

@@ -6,4 +6,11 @@
     <string name="subtracting">Subtrahierenern</string>
 
 
+    <string name="next">Nächstes Problem</string>
+    <string name="english">Englisch</string>
+    <string name="deutsch">Deutsch</string>
+
+    <string name="answerCounting">Welche Nummer ist das?</string>
+
+
 </resources>

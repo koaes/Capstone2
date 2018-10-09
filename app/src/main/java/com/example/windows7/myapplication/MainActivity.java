@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+
         // Obtain the shared Tracker instance.
 
         AnalyticsApplication application = (AnalyticsApplication) getApplication();
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
 
         fragmentTransaction.commit();
 
+    }
+
+    public void setActionBarTitle(String title){
+        getSupportActionBar().setTitle(title);
     }
 
     @Override

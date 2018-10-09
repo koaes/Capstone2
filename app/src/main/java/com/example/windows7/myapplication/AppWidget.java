@@ -5,11 +5,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.RemoteViews;
-
 import com.example.windows7.myapplication.service.AppIntentService;
 
 /**
@@ -23,11 +19,9 @@ public class AppWidget extends AppWidgetProvider {
 
         for (int appWidgetId : appWidgetIds) {
 
-            Log.v("SharedPref", "In on update");
-
-            Intent intent = new Intent(context, AppIntentService.class);
-            intent.putExtra("APPWIDGET_ID", appWidgetId);
-            context.startService(intent);
+            Intent intentService = new Intent(context, AppIntentService.class);
+            intentService.putExtra("APPWIDGET_ID", appWidgetId);
+            context.startService(intentService);
         }
     }
 
@@ -44,8 +38,6 @@ public class AppWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(final Context context, Intent intent){
-
-        Log.v("SharedPref", "In onReceive");
 
         final String action = intent.getAction();
         if(action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)){
@@ -66,11 +58,8 @@ public class AppWidget extends AppWidgetProvider {
 
         Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         intent.setComponent(new ComponentName(context, AppWidget.class));
-        Log.v("SharedPref", "sendRefresh called");
         context.sendBroadcast(intent);
 
     }
-
-
 }
 

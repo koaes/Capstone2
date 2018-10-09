@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Capstone Project</string>
+    <string name="app_name">Learning to Zahlen</string>
+    <string name="MainTitle">Learning to Zahlen</string>
 
     <string name="trackingID">UA-127171647-1</string>
 
@@ -10,4 +11,15 @@
     <string name="numbers">Numbers</string>
     <string name="adding">Addition</string>
     <string name="subtracting">Subtraction</string>
+
+
+    <!--
+    Comments for Counting and Math Fragment Strings
+    -->
+    <string name="answerCounting">What number is this?</string>
+    <string name="countingTitle">Learning to Count</string>
+    <string name="next">Next Problem</string>
+    <string name="check">Check Answer</string>
+    <string name="english">English</string>
+    <string name="deutsch">Deutsch</string>
 </resources>

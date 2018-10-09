@@ -30,7 +30,7 @@ public class MainMenuFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
-
+        ((MainActivity) getActivity()).setActionBarTitle("Learning to Zahlen");
 
 
         menuArray.add("English");
